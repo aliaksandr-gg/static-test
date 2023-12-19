@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 class Test extends Controller{
     public function test1(Request  $request)
     {
+        $bb = 'test';
+        echo $bb['test'];
         $a = DB::table('users')
             ->where('id', $request->get('test'))
             ->first();
