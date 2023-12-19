@@ -1,19 +1,14 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+	- phpstan.neon.dist
+
+services:
+    errorFormatter.tst:
+        class: Utils\StaticAnalyse\ErrorFormatter\GithubErrorFormatter
 
 parameters:
-
-    paths:
-        - app/
-
-    # Level 9 is the highest level
-    level: 6
-#
-#    ignoreErrors:
-#        - "#PHPDoc tag @var#"
-
-    editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
-    errorFormat: github
+    editorUrlTitle: 'Ref: %%relFile%%:%%line%%'
+    editorUrl: 'https://github.com/aliaksandr-gg/static-test/tree/t1/%%file%%&line=%%line%%'
+    errorFormat: tst
     parallel:
         maximumNumberOfProcesses: 2
 
