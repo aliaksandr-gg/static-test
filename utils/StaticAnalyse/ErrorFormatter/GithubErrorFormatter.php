@@ -11,7 +11,7 @@ final class GithubErrorFormatter implements ErrorFormatter
     public function formatErrors(AnalysisResult $analysisResult, Output $output) : int
     {
         $githubRepository = 'https://github.com/aliaksandr-gg/static-test';
-        $githubRef = getenv('GITHUB_REF') ?: 'main';
+        $githubRef = getenv('GITHUB_REF');
         $branch = str_replace('refs/heads/', '', $githubRef);
 
         foreach ($analysisResult->getFileSpecificErrors() as $fileSpecificError) {
@@ -19,7 +19,7 @@ final class GithubErrorFormatter implements ErrorFormatter
             $line = $fileSpecificError->getLine();
             $message = $fileSpecificError->getMessage();
             $errorMessage = sprintf(
-                "%s/blob/%s/%s#L%d - %s",
+                "%s/blob/%s%s#L%d - %s",
                 $githubRepository,
                 $branch,
                 $file,
