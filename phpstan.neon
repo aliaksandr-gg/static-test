@@ -12,8 +12,10 @@ parameters:
 #    ignoreErrors:
 #        - "#PHPDoc tag @var#"
 
+    editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+    errorFormat: github
     parallel:
-        maximumNumberOfProcesses: 10
+        maximumNumberOfProcesses: 2
 
     noUnnecessaryCollectionCall: false
     checkMissingIterableValueType: false
