@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\TestCorrectService;
+use App\Services\TestIncorrectService;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class Test extends Controller{
+    public const B = 'b';
     public function test1(Request  $request)
     {
         $bb = 'test';
@@ -19,6 +22,7 @@ class Test extends Controller{
             ->first();
         $sql = 'SELECT * FROM users WHERE id=' . $request->input('test');
         $c = DB::select($sql);
+       // $a =  new TestIncorrectService();
 
         $newPassword = $_POST['test'];
         $username = $_POST['username'];
@@ -41,5 +45,6 @@ class Test extends Controller{
         $a = [];
         echo $a['aaa'];
         echo 'Test ' . $_GET['country'];
+        //$a =  new TestCorrectService();
     }
 }
