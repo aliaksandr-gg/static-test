@@ -12,6 +12,7 @@ final class GithubErrorFormatter implements ErrorFormatter
     {
         $githubRepository = 'https://github.com/aliaksandr-gg/static-test';
         $githubRef = getenv('GITHUB_REF');
+        $a = getenv('GITHUB_WORKSPACE');
         $branch = str_replace('refs/heads/', '', $githubRef);
 
         foreach ($analysisResult->getFileSpecificErrors() as $fileSpecificError) {
@@ -19,13 +20,14 @@ final class GithubErrorFormatter implements ErrorFormatter
             $line = $fileSpecificError->getLine();
             $message = $fileSpecificError->getMessage();
             $errorMessage = sprintf(
-                "%s/blob/%s%s#L%d - %s",
+                "%s/blob/%s%s#L%d - %s -> %s",
                 $githubRepository,
                 $branch,
                 // TODO check why it works in that way
                 str_replace('app/app', 'app', $file),
                 $line,
-                $message
+                $message,
+                $a
             );
             $errorMessage = str_replace("\n", '%0A', $errorMessage);
             $line = sprintf('::error ::%s', $errorMessage);

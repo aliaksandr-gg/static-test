@@ -54,17 +54,22 @@ class Test extends Controller{
         $a = 1;
         $c = 0;
         $b = $a / $c;
+
+        $this->_test();
+        $this->_test_rec();
+        $this->_test_rec_2();
+        $this->_test_rec_3();
     }
 
     public function _test_rec() {
-        $a = fn () => $this->_test_();
+        $a = fn () => $this->_test();
         return $a();
     }
 
     public function _test_rec_2() {
         $a = function () {
             echo 'test';
-            $this->_test_test();
+            $this->_test_rec_2();
         };
         $a();
     }
