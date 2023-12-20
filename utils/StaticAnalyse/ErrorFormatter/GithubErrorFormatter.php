@@ -20,14 +20,18 @@ final class GithubErrorFormatter implements ErrorFormatter
             $line = $fileSpecificError->getLine();
             $message = $fileSpecificError->getMessage();
             $errorMessage = sprintf(
-                "%s/blob/%s%s#L%d - %s -> %s",
+                "%s/blob/%s%s#L%d - %s -> %s - %s - %s - %s - %s",
                 $githubRepository,
                 $branch,
                 // TODO check why it works in that way
                 str_replace('app/app', 'app', $file),
                 $line,
                 $message,
-                $a
+                $a,
+                getenv('GITHUB_ACTION_REPOSITORY'),
+                getenv('GITHUB_REF_NAME'),
+                getenv('GITHUB_REPOSITORY'),
+                getenv('GITHUB_SERVER_URL'),
             );
             $errorMessage = str_replace("\n", '%0A', $errorMessage);
             $line = sprintf('::error ::%s', $errorMessage);
