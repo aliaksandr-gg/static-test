@@ -15,7 +15,6 @@ final class GithubErrorFormatter implements ErrorFormatter
             getenv('GITHUB_SERVER_URL'),
             getenv('GITHUB_REPOSITORY')
         );
-
         $githubRef = getenv('GITHUB_REF');
         $a = getenv('GITHUB_WORKSPACE');
         $branch = str_replace('refs/heads/', '', $githubRef);
@@ -28,8 +27,7 @@ final class GithubErrorFormatter implements ErrorFormatter
                 "%s/blob/%s%s#L%d - %s -> %s - %s - %s - %s - %s - %s - %s - %s",
                 $githubRepository,
                 $branch,
-                // TODO check why it works in that way
-                str_replace('app/app', 'app', $file),
+                str_starts_with($file, '/app/app/') ? str_replace('/app/app/', '/app', $file) : $file,
                 $line,
                 $message,
                 $a,
