@@ -12,7 +12,9 @@ class Test extends Controller{
     public const bbbbb = 'b';
     public function test1(Request  $request)
     {
+        $aaaa = [];
         $bb = 'test';
+        $aaaa['test'];
         echo $bb['test'];
         $a = DB::table('users')
             ->where('id', $request->get('test'))
@@ -45,6 +47,12 @@ class Test extends Controller{
         $a = [];
         echo $a['aaa'];
         echo 'Test ' . $_GET['country'];
-        //$a =  new TestCorrectService();
+        $a =  new TestCorrectService();
+    }
+
+    public function _test() {
+        $a = 1;
+        $c = 0;
+        $b = $a / $c;
     }
 }
