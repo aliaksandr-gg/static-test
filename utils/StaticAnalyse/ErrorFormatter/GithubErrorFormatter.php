@@ -25,7 +25,7 @@ final class GithubErrorFormatter implements ErrorFormatter
                 "%s/blob/%s%s#L%d - %s",
                 $githubRepository,
                 $branch,
-                str_starts_with($file, '/app/app/') ? str_replace('/app/app/', '/app', $file) : $file,
+                str_starts_with($file, '/app/app/') ? str_replace('/app/app/', '/app/', $file) : $file,
                 $line,
                 $message
             );
