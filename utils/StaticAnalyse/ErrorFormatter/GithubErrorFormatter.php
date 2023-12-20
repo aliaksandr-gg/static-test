@@ -10,7 +10,12 @@ final class GithubErrorFormatter implements ErrorFormatter
 {
     public function formatErrors(AnalysisResult $analysisResult, Output $output) : int
     {
-        $githubRepository = 'https://github.com/aliaksandr-gg/static-test';
+        $githubRepository = sprintf(
+            '%s/%s',
+            getenv('GITHUB_SERVER_URL'),
+            getenv('GITHUB_REPOSITORY')
+        );
+
         $githubRef = getenv('GITHUB_REF');
         $a = getenv('GITHUB_WORKSPACE');
         $branch = str_replace('refs/heads/', '', $githubRef);
@@ -20,7 +25,7 @@ final class GithubErrorFormatter implements ErrorFormatter
             $line = $fileSpecificError->getLine();
             $message = $fileSpecificError->getMessage();
             $errorMessage = sprintf(
-                "%s/blob/%s%s#L%d - %s -> %s - %s - %s - %s - %s",
+                "%s/blob/%s%s#L%d - %s -> %s - %s - %s - %s - %s - %s - %s - %s",
                 $githubRepository,
                 $branch,
                 // TODO check why it works in that way
@@ -32,6 +37,9 @@ final class GithubErrorFormatter implements ErrorFormatter
                 getenv('GITHUB_REF_NAME'),
                 getenv('GITHUB_REPOSITORY'),
                 getenv('GITHUB_SERVER_URL'),
+                $fileSpecificError->getFilePath(),
+                $fileSpecificError->getFile(),
+                getenv('GITHUB_WORKSPACE'),
             );
             $errorMessage = str_replace("\n", '%0A', $errorMessage);
             $line = sprintf('::error ::%s', $errorMessage);
