@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class Test extends Controller{
-    public const B = 'b';
+    public const bbbbb = 'b';
     public function test1(Request  $request)
     {
         $bb = 'test';
