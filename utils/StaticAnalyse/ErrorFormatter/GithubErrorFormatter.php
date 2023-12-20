@@ -15,9 +15,7 @@ final class GithubErrorFormatter implements ErrorFormatter
             getenv('GITHUB_SERVER_URL'),
             getenv('GITHUB_REPOSITORY')
         );
-        $githubRef = getenv('GITHUB_REF');
-        $a = getenv('GITHUB_WORKSPACE');
-        $branch = str_replace('refs/heads/', '', $githubRef);
+        $branch = str_replace('refs/heads/', '', getenv('GITHUB_REF'));
 
         foreach ($analysisResult->getFileSpecificErrors() as $fileSpecificError) {
             $file = $fileSpecificError->getFile();
@@ -31,6 +29,8 @@ final class GithubErrorFormatter implements ErrorFormatter
                 $line,
                 $message
             );
+            // newlines need to be encoded
+            // see https://github.com/actions/starter-workflows/issues/68#issuecomment-581479448
             $errorMessage = str_replace("\n", '%0A', $errorMessage);
             $line = sprintf('::error ::%s', $errorMessage);
             $output->writeRaw($line);
