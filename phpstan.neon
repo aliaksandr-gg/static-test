@@ -15,6 +15,7 @@ rules:
     - Utils\StaticAnalyse\Rule\MyRule
 
 parameters:
+    tmpDir: /tmp/phpstan
     paths:
         - app/
     # Level 9 is the highest level

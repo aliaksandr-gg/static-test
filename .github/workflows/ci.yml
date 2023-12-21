@@ -12,6 +12,14 @@ jobs:
       - name: Copy env example for initial composer setup
         run: cp .env.example .env
 
+      - name: Trying to Restore Result Cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/phpstan
+          key: "result-cache-${{ github.run_id }}"
+          restore-keys: |
+            result-cache-
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -44,3 +52,9 @@ jobs:
 
       - name: Static Code Analysis
         run: composer analysis:run
+
+      - name: Write Restore Result Cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/phpstan
+          key: result-cache-${{ github.run_id }}
