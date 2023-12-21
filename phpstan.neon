@@ -18,7 +18,7 @@ parameters:
     paths:
         - app/
     # Level 9 is the highest level
-    level: max
+    level: 5
 
     errorFormat: tst
     parallel:
