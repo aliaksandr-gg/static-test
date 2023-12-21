@@ -15,7 +15,7 @@ jobs:
       - uses: php-actions/composer@v6
         with:
           php_version: "8.1"
-          command: |
+          args: |
             --ignore-platform-req=ext-zip
             --ignore-platform-req=ext-imagick
             --ignore-platform-req=ext-bcmath
