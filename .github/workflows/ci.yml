@@ -9,6 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: php-actions/composer@v6
-
-      - name: Static Analysis
-        uses: php-actions/phpstan@v3
+        with:
+          php_version: "8.1"
+        run: |
+          composer audit
+          composer analysis:run
