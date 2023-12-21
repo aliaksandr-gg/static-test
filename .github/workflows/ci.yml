@@ -16,9 +16,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /tmp/phpstan
-          key: "result-cache-${{ github.run_id }}"
+          key: analysis-result-cache-${{ github.run_id }}
           restore-keys: |
-            result-cache-
+            analysis-result-cache-
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -52,9 +52,3 @@ jobs:
 
       - name: Static Code Analysis
         run: composer analysis:run
-
-      - name: Write Restore Result Cache
-        uses: actions/cache@v3
-        with:
-          path: /tmp/phpstan
-          key: result-cache-${{ github.run_id }}
