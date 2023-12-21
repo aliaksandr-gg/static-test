@@ -12,10 +12,13 @@ jobs:
       - name: Copy env example for initial composer setup
         run: cp .env.example .env
 
-      - uses: php-actions/composer@v6
+      - name: Install Dependencies
+        uses: php-actions/composer@v6
+        env:
+          APP_ENV: analysis
         with:
-          php_extensions: gd pdo_pgsql
-          php_version: "8.1"
+          php_version: 8.0
+          php_extensions: gd
           args: |
             --ignore-platform-req=ext-zip
             --ignore-platform-req=ext-imagick
@@ -25,6 +28,12 @@ jobs:
             --ignore-platform-req=ext-rdkafka
             --ignore-platform-req=ext-sockets
             --ignore-platform-req=ext-elastic_apm
+
+      - name: PHP version
+        run: php --version
+
+      - name: Composer version
+        run: composer --version
 
       - name: Test ext GD
         run: php -r "var_dump(extension_loaded('gd'));"
