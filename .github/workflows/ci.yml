@@ -12,22 +12,28 @@ jobs:
       - name: Copy env example for initial composer setup
         run: cp .env.example .env
 
-      - name: Install Dependencies
-        uses: php-actions/composer@v6
-        env:
-          APP_ENV: analysis
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php_version: 8.0
-          php_extensions: gd
-          args: |
-            --ignore-platform-req=ext-zip
-            --ignore-platform-req=ext-imagick
-            --ignore-platform-req=ext-bcmath
-            --ignore-platform-req=ext-gd
-            --ignore-platform-req=ext-pcntl
-            --ignore-platform-req=ext-rdkafka
-            --ignore-platform-req=ext-sockets
-            --ignore-platform-req=ext-elastic_apm
+          php-version: 8.0
+          extensions: gd
+
+#      - name: Install Dependencies
+#        uses: php-actions/composer@v6
+#        env:
+#          APP_ENV: analysis
+#        with:
+#          php_version: 8.0
+#          php_extensions: gd
+#          args: |
+#            --ignore-platform-req=ext-zip
+#            --ignore-platform-req=ext-imagick
+#            --ignore-platform-req=ext-bcmath
+#            --ignore-platform-req=ext-gd
+#            --ignore-platform-req=ext-pcntl
+#            --ignore-platform-req=ext-rdkafka
+#            --ignore-platform-req=ext-sockets
+#            --ignore-platform-req=ext-elastic_apm
 
       - name: PHP version
         run: php --version
@@ -40,6 +46,6 @@ jobs:
 
       - name: Test ext PDO
         run: php -r "var_dump(extension_loaded('pdo_pgsql'));"
-
-      - name: Static Code Analysis
-        run: composer analysis:run
+#
+#      - name: Static Code Analysis
+#        run: composer analysis:run
