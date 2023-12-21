@@ -11,6 +11,9 @@ jobs:
       - uses: php-actions/composer@v6
         with:
           php_version: "8.1"
-        run: |
-          composer audit
-          composer analysis:run
+
+      - name: Dependencies Audit
+        run: composer audit
+
+      - name: Static Code Analysis
+        run: composer analysis:run
