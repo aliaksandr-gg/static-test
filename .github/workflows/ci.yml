@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  build-test:
+  static-code-analysis:
     runs-on: ubuntu-latest
 
     steps:
@@ -11,6 +11,17 @@ jobs:
       - uses: php-actions/composer@v6
         with:
           php_version: "8.1"
+          command: |
+            --ignore-platform-req=ext-zip
+            --ignore-platform-req=ext-imagick
+            --ignore-platform-req=ext-bcmath
+            --ignore-platform-req=ext-gd
+            --ignore-platform-req=ext-pcntl
+            --ignore-platform-req=ext-rdkafka
+            --ignore-platform-req=ext-sockets
+            --ignore-platform-req=ext-elastic_apm
+            install
+            --no-scripts
 
       - name: Dependencies Audit
         run: composer audit
