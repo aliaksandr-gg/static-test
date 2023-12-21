@@ -19,15 +19,15 @@ jobs:
           extensions: gd
 
       - name: Install Dependencies
-        run: APP_ENV=analysis composer \
-          --ignore-platform-req=ext-zip \
-          --ignore-platform-req=ext-imagick \
-          --ignore-platform-req=ext-bcmath \
-          --ignore-platform-req=ext-gd \
-          --ignore-platform-req=ext-pcntl \
-          --ignore-platform-req=ext-rdkafka \
-          --ignore-platform-req=ext-sockets \
-          --ignore-platform-req=ext-elastic_apm \
+        run: APP_ENV=analysis composer
+          --ignore-platform-req=ext-zip
+          --ignore-platform-req=ext-imagick
+          --ignore-platform-req=ext-bcmath
+          --ignore-platform-req=ext-gd
+          --ignore-platform-req=ext-pcntl
+          --ignore-platform-req=ext-rdkafka
+          --ignore-platform-req=ext-sockets
+          --ignore-platform-req=ext-elastic_apm
           install
 
       - name: PHP version
