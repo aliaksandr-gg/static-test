@@ -8,6 +8,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Copy env example for initial composer setup
+        run: cp .env.example .env
+
       - uses: php-actions/composer@v6
         with:
           php_version: "8.1"
@@ -20,8 +24,6 @@ jobs:
             --ignore-platform-req=ext-rdkafka
             --ignore-platform-req=ext-sockets
             --ignore-platform-req=ext-elastic_apm
-            install
-            --no-scripts
 
       - name: Dependencies Audit
         run: composer audit
