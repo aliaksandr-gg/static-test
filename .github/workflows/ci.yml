@@ -14,7 +14,7 @@ jobs:
 
       - uses: php-actions/composer@v6
         with:
-          php_extensions: pdo_pgsql gd
+          php_extensions: gd pdo_pgsql
           php_version: "8.1"
           args: |
             --ignore-platform-req=ext-zip
@@ -30,7 +30,7 @@ jobs:
         run: php -r "var_dump(extension_loaded('gd'));"
 
       - name: Test ext PDO
-        run: php -r "var_dump(extension_loaded('php_pdo_pgsql'));"
+        run: php -r "var_dump(extension_loaded('pdo_pgsql'));"
 
       - name: Static Code Analysis
         run: composer analysis:run
