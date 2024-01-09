@@ -1,21 +1,29 @@
 includes:
     - ./vendor/nunomaduro/larastan/extension.neon
+    - ./phpstan-baseline.neon
+
+services:
+#    -
+#        class: Utils\StaticAnalyse\TestCollector
+#        tags:
+#            - phpstan.collector
+    errorFormatter.tst:
+        class: Utils\StaticAnalyse\ErrorFormatter\GithubErrorFormatter
+
+rules:
+#    - Utils\StaticAnalyse\Rule\PropertyTestRule
+    - Utils\StaticAnalyse\Rule\MyRule
 
 parameters:
-
+    tmpDir: /tmp/phpstan
     paths:
         - app/
-
     # Level 9 is the highest level
-    level: 6
-#
-#    ignoreErrors:
-#        - "#PHPDoc tag @var#"
+    level: 5
 
-    editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
-    errorFormat: github
+    errorFormat: tst
     parallel:
         maximumNumberOfProcesses: 2
 
-    noUnnecessaryCollectionCall: false
+    noUnnecessaryCollectionCall: true
     checkMissingIterableValueType: false
