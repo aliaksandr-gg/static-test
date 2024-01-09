@@ -1,9 +1,18 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - develop
+      - release
+  pull_request:
+    branches:
+      - develop
+      - release
 
 jobs:
-  static-code-analysis:
+  analyse:
+    name: Static Code Analysis
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +32,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.0
           extensions: gd
 
       - name: Install Dependencies
@@ -38,17 +47,5 @@ jobs:
           --ignore-platform-req=ext-elastic_apm
           install
 
-      - name: PHP version
-        run: php --version
-
-      - name: Composer version
-        run: composer --version
-
-      - name: Test ext GD
-        run: php -r "var_dump(extension_loaded('gd'));"
-
-      - name: Test ext PDO
-        run: php -r "var_dump(extension_loaded('pdo_pgsql'));"
-
-      - name: Static Code Analysis
-        run: composer analysis:run
+      - name: Analysis
+        run: APP_ENV=analysis ./vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=2G
