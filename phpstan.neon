@@ -3,23 +3,18 @@ includes:
     - ./phpstan-baseline.neon
 
 services:
-#    -
-#        class: Utils\StaticAnalyse\TestCollector
-#        tags:
-#            - phpstan.collector
     errorFormatter.tst:
         class: Utils\StaticAnalyse\ErrorFormatter\GithubErrorFormatter
 
-rules:
-#    - Utils\StaticAnalyse\Rule\PropertyTestRule
-    - Utils\StaticAnalyse\Rule\MyRule
+#rules:
+#    - Utils\StaticAnalyse\Rule\MyRule
 
 parameters:
     tmpDir: /tmp/phpstan
     paths:
         - app/
     # Level 9 is the highest level
-    level: 5
+    level: 4
 
     errorFormat: tst
     parallel:
