@@ -1,0 +1,11 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Return type \\(void\\) of method App\\\\Http\\\\Middleware\\\\Authenticate\\:\\:redirectTo\\(\\) should be compatible with return type \\(string\\|null\\) of method Illuminate\\\\Auth\\\\Middleware\\\\Authenticate\\:\\:redirectTo\\(\\)$#"
+			count: 1
+			path: app/Http/Middleware/Authenticate.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: app/Http/Middleware/Authenticate.php
