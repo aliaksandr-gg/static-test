@@ -17,6 +17,6 @@ jobs:
           git config user.name 'Alex Test'
           git config user.email 'aliaksandr.gg+testpr1@gmail.com'
           date +%s > test.txt
-          git commit -m "Test Commit 1"
+          git commit -am "Test Commit 1"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
