@@ -8,4 +8,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public const A = 'a';
+    public string $a;
+    public string $c;
 }
