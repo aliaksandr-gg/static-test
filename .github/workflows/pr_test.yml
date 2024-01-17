@@ -35,7 +35,7 @@ jobs:
           install
 
       - name: Generating Baseline
-        run: ./vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=2G --generate-baseline phpstan-baseline.neon
+        run: ./vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=2G --allow-empty-baseline --generate-baseline phpstan-baseline.neon
 
       - name: Create commit
         run: |
